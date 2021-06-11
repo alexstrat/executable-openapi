@@ -3,9 +3,11 @@
   "private": true,
   "scripts": {
     "test": "lerna exec -- npm run test",
-    "lint": "lerna exec -- npm run lint"
+    "lint": "lerna exec -- npm run lint",
+    "new:package": "hygen package new"
   },
   "devDependencies": {
+    "hygen": "^6.1.0",
     "lerna": "^4.0.0",
     "typescript": "^4.3.2"
   },
