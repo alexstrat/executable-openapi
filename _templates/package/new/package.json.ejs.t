@@ -17,7 +17,9 @@ to: packages/<%=name%>/package.json
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "npm run clean && npm run compile",
+    "compile": "tsc -p tsconfig.build.json",
+    "clean": "rm -rf ./dist",
     "prepare": "npm run build",
     "test": "jest",
     "lint": "eslint ."

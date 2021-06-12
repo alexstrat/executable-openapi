@@ -1,22 +1,14 @@
 {
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "declaration": true,
-    "strictNullChecks": true,
-    "target": "es2016",
-    "outDir": "dist",
-    "strict": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "es2015",
-      "dom"
-    ],
-  },
+    "baseUrl": "./packages",
+    "paths": {
+      "executable-openapi-types": [
+        "executable-openapi-types/src"
+      ],
+      "executable-openapi-router": [
+        "executable-openapi-router/src"
+      ],
+    }
+  }
 }
