@@ -7,4 +7,7 @@ to: packages/<%=name%>/tsconfig.build.json
     "rootDir": "./src",
     "outDir": "./dist",
   },
+  "exclude": [
+    "src/__tests__"
+  ]
 }
