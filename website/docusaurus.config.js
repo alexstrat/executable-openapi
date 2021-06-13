@@ -93,6 +93,7 @@ module.exports = {
       .map((dirent) => [
         'docusaurus-plugin-typedoc',
         {
+          id: dirent.name,
           entryPoints: [`../packages/${dirent.name}/src/index.ts`],
           tsconfig: `../packages/${dirent.name}/tsconfig.json`,
 
