@@ -2,4 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
   },
+  "exclude": [
+    "src/__tests__"
+  ]
 }
