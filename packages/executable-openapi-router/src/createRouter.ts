@@ -3,6 +3,7 @@ import { OpenAPIV3 } from 'openapi-types'
 import { params } from 'bath'
 import * as pointer from 'jsonpointer'
 import { HandlersMap, OperationHandler } from './types'
+import { pathConcretenessCompareFunction } from './utils'
 
 interface CreateRouterOptions {
   /**
@@ -24,66 +25,69 @@ type RefResolver = ($ref: string) => Promise<unknown>
  * @param handlers - A map of handlers
  * @param options -  `CreateRouterOptions`
  */
-export const createRouter = <TContext = undefined>(
+export function createRouter<TContext = undefined> (
   document: OpenAPIV3.Document,
   handlers: HandlersMap<TContext>,
   options: CreateRouterOptions = {}
-): ExecuteOperation<TContext> => {
+): ExecuteOperation<TContext> {
   const paths = Object.entries(document.paths)
     .map(([path, pathItemObject]) => [path, params(path), pathItemObject] as const)
 
   const defaultHandler = handlers.default !== undefined ? handlers.default : notImplementedHandler
 
-  const $ref = options.documentRefResolver !== undefined ? options.documentRefResolver : createDefaultRefResolver(document)
+  const resolveRef = options.documentRefResolver !== undefined ? options.documentRefResolver : createDefaultRefResolver(document)
 
   const execute = async (request: OperationExecutionRequest, context: TContext): Promise<OperationExecutionResponse | null> => {
-    for (const [path, match, pathItemObject] of paths) {
-      const pathParameters = match(request.path)
+    const matchedPaths = paths
+      .map(([path, match, pathItemObject]) => [path, match(request.path), pathItemObject] as const)
+      .filter(([, pathParameters]) => {
+        if (pathParameters !== null) return true
+        return false
+      })
+      // take the most contrete path
+      .sort(([path1], [path2]) => pathConcretenessCompareFunction(path1, path2))
 
-      if (pathParameters === null) {
-        // not a match
-        continue
-      }
+    // not a match
+    if (matchedPaths.length === 0) return null
 
-      if (pathItemObject === undefined) return null
+    const [path, pathParameters, pathItemObject] = matchedPaths[0]
 
-      let resolvedPathItemObject: OpenAPIV3.PathItemObject | undefined
-      if (pathItemObject.$ref !== undefined) {
-        resolvedPathItemObject = await $ref(pathItemObject.$ref) as OpenAPIV3.PathItemObject
-      } else {
-        resolvedPathItemObject = pathItemObject
-      }
-      const operationObject = resolvedPathItemObject[request.method]
-      if (operationObject === undefined) return null
+    if (pathParameters === null) return null
+    if (pathItemObject === undefined) return null
 
-      const info = {
-        document,
-        request,
-        operationObject,
-        path,
-        pathItemObject: resolvedPathItemObject
-      }
+    let resolvedPathItemObject: OpenAPIV3.PathItemObject | undefined
+    if (pathItemObject.$ref !== undefined) {
+      resolvedPathItemObject = await resolveRef(pathItemObject.$ref) as OpenAPIV3.PathItemObject
+    } else {
+      resolvedPathItemObject = pathItemObject
+    }
+    const operationObject = resolvedPathItemObject[request.method]
+    if (operationObject === undefined) return null
 
-      const req = {
-        parameters: {
-          path: pathParameters
-        }
-      }
-
-      // find a handler
-      const pathHandler = handlers?.paths?.[path][request.method]
-      const operationHandler = operationObject.operationId !== undefined ? handlers?.operations?.[operationObject.operationId] : undefined
-      const handler = (pathHandler !== undefined) ? pathHandler : operationHandler
-
-      if (handler === undefined) {
-        return await defaultHandler(req, context, info)
-      }
-
-      return await handler(req, context, info)
+    const info = {
+      document,
+      request,
+      operationObject,
+      path,
+      pathItemObject: resolvedPathItemObject
     }
 
-    // no match found
-    return null
+    const req = {
+      parameters: {
+        path: pathParameters
+      }
+    }
+
+    // find a handler
+    const pathHandler = handlers?.paths?.[path][request.method]
+    const operationHandler = operationObject.operationId !== undefined ? handlers?.operations?.[operationObject.operationId] : undefined
+    const handler = (pathHandler !== undefined) ? pathHandler : operationHandler
+
+    if (handler === undefined) {
+      return await defaultHandler(req, context, info)
+    }
+
+    return await handler(req, context, info)
   }
 
   return execute as ExecuteOperation<TContext>

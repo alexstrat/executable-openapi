@@ -19,7 +19,9 @@ const document: OpenAPIV3.Document = {
     },
     '/foos/{id}': {
       $ref: '#/paths/~1foo~1{id}'
-    }
+    },
+    '/user/{id}': { get: {} },
+    '/user/none': { get: {} }
   }
 }
 
@@ -132,5 +134,28 @@ describe('executable-openapi-router', () => {
     })
 
     expect(handler).toHaveBeenCalled()
+  })
+
+  test('match concrete routes before templated ones', async () => {
+    const handler = jest.fn(async (_: Request): Promise<OperationExecutionResponse> => ({
+      status: 500
+    }))
+    const handlerConcrete = jest.fn(async (_: Request): Promise<OperationExecutionResponse> => ({
+      status: 500
+    }))
+    const execute = createRouter(document, {
+      paths: {
+        '/user/{id}': { get: handler },
+        '/user/none': { get: handlerConcrete }
+      }
+    })
+
+    await execute({
+      method: 'get',
+      path: '/user/none'
+    })
+
+    expect(handlerConcrete).toHaveBeenCalled()
+    expect(handler).not.toHaveBeenCalled()
   })
 })
