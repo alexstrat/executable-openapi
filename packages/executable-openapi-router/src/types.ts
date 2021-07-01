@@ -17,7 +17,7 @@ export type OperationHandler<TContext> = (
   req: Request,
   context: TContext,
   info: OperationInfo
-) => Promise<OperationExecutionResponse>
+) => OperationExecutionResponse | Promise<OperationExecutionResponse>
 
 export interface OperationInfo {
   request: OperationExecutionRequest

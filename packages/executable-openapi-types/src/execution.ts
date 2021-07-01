@@ -43,7 +43,7 @@ export interface OperationExecutionRequest {
    * The headers of the request.
    */
   headers?: {
-    [headerName: string]: string
+    [headerName: string]: string | string[] | undefined
   }
 
   /**
@@ -75,7 +75,7 @@ export interface OperationExecutionRequest {
    * ```
    */
   securities?: {
-    [securitySchemeName: string]: boolean | [scopeName: string]
+    [securitySchemeName: string]: boolean | string[]
   }
 }
 

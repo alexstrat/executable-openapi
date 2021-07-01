@@ -1,13 +1,19 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": "./packages",
+    "baseUrl": ".",
     "paths": {
+      "executable-openapi-express-adapter": [
+        "packages/executable-openapi-express-adapter/src"
+      ],
+      "executable-openapi-middleware": [
+        "packages/executable-openapi-middleware/src"
+      ],
       "executable-openapi-types": [
-        "executable-openapi-types/src"
+        "packages/executable-openapi-types/src"
       ],
       "executable-openapi-router": [
-        "executable-openapi-router/src"
+        "packages/executable-openapi-router/src"
       ],
     }
   }
