@@ -1,0 +1,21 @@
+openapi: 3.0.0
+info:
+  title: proposed schema
+  version: spec
+paths:
+  /hello/{name}:
+    get:
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type : string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string

@@ -1,0 +1,25 @@
+{
+  "name": "01-example-simple-express",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node app.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "js-yaml": "^4.1.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.4",
+    "executable-openapi-router": "^0.0.0",
+    "executable-openapi-express-adapter": "^0.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.12",
+    "@types/js-yaml": "^4.0.1",
+    "openapi-types": "^9.0.3"
+  }
+}
