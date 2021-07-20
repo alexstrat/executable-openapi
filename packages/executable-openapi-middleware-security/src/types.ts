@@ -1,5 +1,4 @@
-import { OperationExecutionResponse } from 'executable-openapi-types'
-import { Request, OperationInfo } from 'executable-openapi-router'
+import { OperationExecutionResponse, OperationInfo, Body, Parameters } from 'executable-openapi-types'
 
 export interface ExecutableOpenAPIMiddlewareSecurity<TExecutionContext> {
   /**
@@ -8,7 +7,8 @@ export interface ExecutableOpenAPIMiddlewareSecurity<TExecutionContext> {
    */
   forbiddenResponse?: (
     schemeResults: { [schemeName: string]: string },
-    req: Request,
+    paramters: Parameters,
+    body: Body,
     context: TExecutionContext,
     info: OperationInfo
   ) => OperationExecutionResponse | Promise<OperationExecutionResponse>

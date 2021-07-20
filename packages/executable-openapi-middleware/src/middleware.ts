@@ -9,7 +9,7 @@ export function applyMiddleware<TExecutionContext> (
   return middlewareMaps.reduceRight((prevHandlers, middlewareMap) => {
     return mapOperationHandlers(
       prevHandlers,
-      (handler, handlerInfo) => async (req, context, info) => {
+      (handler, handlerInfo) => async (parameters, body, context, info) => {
         let middleware: OperationMiddlewareHandler<TExecutionContext> | undefined
 
         if (typeof middlewareMap === 'function') {
@@ -24,14 +24,14 @@ export function applyMiddleware<TExecutionContext> (
             middleware = middlewareMap.operations?.[info.operationObject.operationId]
           }
           if (middleware === undefined) {
-            middleware = middlewareMap.paths?.[info.path]?.[info.request.method]
+            middleware = middlewareMap.paths?.[info.path]?.[info.executionRequest.method]
           }
         }
 
         if (middleware !== undefined) {
-          return await middleware(handler, req, context, info)
+          return await middleware(handler, parameters, body, context, info)
         } else {
-          return await handler(req, context, info)
+          return await handler(parameters, body, context, info)
         }
       })
   }, handlers)

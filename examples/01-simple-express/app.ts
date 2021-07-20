@@ -12,11 +12,11 @@ const port = 8080
 const execute = createRouter(spec, {
   paths: {
     '/hello/{name}': {
-      get: (req) => ({
+      get: (parameters) => ({
         status: 200,
         content: {
           'application/json': {
-            message: `Hello ${req.parameters?.path?.name}`
+            message: `Hello ${parameters?.path?.name}`
           }
         }
       })

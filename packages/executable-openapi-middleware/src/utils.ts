@@ -1,5 +1,5 @@
-import { HandlersMap, OperationHandler } from 'executable-openapi-router'
-import { HTTPRequestMethod } from 'executable-openapi-types'
+import { HandlersMap } from 'executable-openapi-router'
+import { HTTPRequestMethod, OperationHandler } from 'executable-openapi-types'
 
 export function mapOperationHandlers<TExecutionContext> (
   handlers: HandlersMap<TExecutionContext>,

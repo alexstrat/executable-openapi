@@ -51,11 +51,11 @@ describe('executable-openapi-express-adapter', () => {
   beforeEach(() => {
     execute = createRouter(document, {
       operations: {
-        hello: (req) => ({
+        hello: (parameters) => ({
           status: 200,
           content: {
             'application/json': {
-              message: `Hello ${req.parameters?.path?.name ?? ''}`
+              message: `Hello ${parameters?.path?.name ?? ''}`
             }
           }
         })

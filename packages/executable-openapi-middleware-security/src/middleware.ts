@@ -14,23 +14,23 @@ import { validateSecurity } from './validation'
 export const executableOpenAPIMiddlewareSecurity = <TExecutionContext>({
   forbiddenResponse = defaultForbiddenResponse
 }: ExecutableOpenAPIMiddlewareSecurity<TExecutionContext> = {}): OperationMiddlewareHandler<TExecutionContext> => {
-  return async (handle, req, context, info) => {
-    const { operationObject, document, request } = info
+  return async (handle, paramters, body, context, info) => {
+    const { operationObject, document, executionRequest } = info
 
     // Security at operation level overrides global security
     // https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#fixed-fields
     const security = operationObject.security !== undefined ? operationObject.security : document.security
 
     if (security === undefined) {
-      return await handle(req, context, info)
+      return await handle(paramters, body, context, info)
     }
 
-    const [pass, schemeResults] = validateSecurity(security, request)
+    const [pass, schemeResults] = validateSecurity(security, executionRequest)
     if (!pass) {
-      return await forbiddenResponse(schemeResults, req, context, info)
+      return await forbiddenResponse(schemeResults, paramters, body, context, info)
     }
 
-    return await handle(req, context, info)
+    return await handle(paramters, body, context, info)
   }
 }
 

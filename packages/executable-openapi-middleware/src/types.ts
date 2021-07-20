@@ -1,10 +1,10 @@
 
-import { OperationHandler, Request, OperationInfo } from 'executable-openapi-router'
-import { HTTPRequestMethod, OperationExecutionResponse } from 'executable-openapi-types'
+import { HTTPRequestMethod, OperationExecutionResponse, OperationHandler, OperationInfo, Parameters, Body } from 'executable-openapi-types'
 
 export type OperationMiddlewareHandler<TExecutionContext> = (
   handle: OperationHandler<TExecutionContext>,
-  req: Request,
+  paramters: Parameters,
+  body: Body,
   context: TExecutionContext,
   info: OperationInfo
 ) => Promise<OperationExecutionResponse>

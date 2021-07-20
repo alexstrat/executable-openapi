@@ -1,5 +1,5 @@
-import { createRouter, HandlersMap, OperationHandler } from 'executable-openapi-router'
-import { ExecuteOperation } from 'executable-openapi-types'
+import { createRouter, HandlersMap } from 'executable-openapi-router'
+import { ExecuteOperation, OperationHandler } from 'executable-openapi-types'
 import { OpenAPIV3 } from 'openapi-types'
 import { applyMiddleware } from '..'
 
@@ -55,7 +55,7 @@ describe('executable-openapi-middleware', () => {
           handlers,
           async (handler, ...rest) => {
             spy()
-            return await handler(...rest)
+            return handler(...rest)
           })
         execute = createRouter<undefined>(document, newHandlers)
       })
@@ -74,7 +74,7 @@ describe('executable-openapi-middleware', () => {
           operations: {
             getBar: async (handler, ...rest) => {
               spy()
-              return await handler(...rest)
+              return handler(...rest)
             }
           }
         })
@@ -103,7 +103,7 @@ describe('executable-openapi-middleware', () => {
             '/bar/{barId}': {
               get: async (handler, ...rest) => {
                 spy()
-                return await handler(...rest)
+                return handler(...rest)
               }
             }
           }
