@@ -2,6 +2,10 @@
   "name": "executable-openapi-router",
   "version": "0.0.0",
   "description": "A router for executable-openapi",
+  "keywords": [
+    "openapi",
+    "executable-openapi"
+  ],
   "author": "Alexandre Lachèze <alexandre.lacheze@gmail.com>",
   "homepage": "",
   "license": "ISC",

@@ -2,6 +2,10 @@
   "name": "executable-openapi-express-adapter",
   "version": "0.0.0",
   "description": "An executable OpenAPI adapter for ExpressJS",
+  "keywords": [
+    "openapi",
+    "executable-openapi"
+  ],
   "author": "Alexandre Lachèze <alexandre.lacheze@gmail.com>",
   "homepage": "",
   "license": "ISC",

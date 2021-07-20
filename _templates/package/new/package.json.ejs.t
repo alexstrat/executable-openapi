@@ -5,6 +5,10 @@ to: packages/<%=name%>/package.json
   "name": "<%=name%>",
   "version": "0.0.0",
   "description": "<%=description%>",
+  "keywords": [
+    "openapi",
+    "executable-openapi"
+  ],
   "author": "Alexandre Lachèze <alexandre.lacheze@gmail.com>",
   "homepage": "",
   "license": "ISC",

@@ -2,6 +2,10 @@
   "name": "executable-openapi-types",
   "version": "0.0.0",
   "description": "Types for executable OpenAPI",
+  "keywords": [
+    "openapi",
+    "executable-openapi"
+  ],
   "author": "Alexandre Lachèze <alexandre.lacheze@gmail.com>",
   "homepage": "",
   "license": "ISC",
