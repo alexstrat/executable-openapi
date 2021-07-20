@@ -1,4 +1,4 @@
-# Executale OpenAPI
+# Executable OpenAPI
 
 Executable OpenAPI is a set of tools to implement a design-first API from OpenAPI specification.
 
