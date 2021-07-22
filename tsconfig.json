@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "executable-openapi-test-utils": [
+        "executable-openapi-test-utils/src"
+      ],
       "executable-openapi-middleware-security": [
         "executable-openapi-middleware-security/src"
       ],
