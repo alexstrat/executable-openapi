@@ -36,6 +36,7 @@
     "executable-openapi-middleware": "^0.0.0",
     "executable-openapi-router": "^0.0.0",
     "executable-openapi-types": "^0.0.0",
+    "executable-openapi-test-utils": "^0.0.0",
     "jest": "^27.0.4",
     "openapi-types": "^9.1.0",
     "ts-jest": "^27.0.2",

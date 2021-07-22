@@ -1,6 +1,7 @@
 import { createRouter, HandlersMap } from 'executable-openapi-router'
 import { ExecuteOperation, OperationHandler } from 'executable-openapi-types'
 import { OpenAPIV3 } from 'openapi-types'
+import { request } from 'executable-openapi-test-utils'
 import { applyMiddleware } from '..'
 
 const document: OpenAPIV3.Document = {
@@ -55,13 +56,13 @@ describe('executable-openapi-middleware', () => {
           handlers,
           async (handler, ...rest) => {
             spy()
-            return handler(...rest)
+            return await handler(...rest)
           })
         execute = createRouter<undefined>(document, newHandlers)
       })
 
       it('gets called on any path', async () => {
-        await execute({ path: '/bar/12', method: 'get' })
+        await request(execute).get('/bar/12')
         expect(spy).toHaveBeenCalled()
         expect(getBarHandler).toHaveBeenCalled()
       })
@@ -74,7 +75,7 @@ describe('executable-openapi-middleware', () => {
           operations: {
             getBar: async (handler, ...rest) => {
               spy()
-              return handler(...rest)
+              return await handler(...rest)
             }
           }
         })
@@ -83,13 +84,13 @@ describe('executable-openapi-middleware', () => {
       })
 
       it('applies middleware on the operation', async () => {
-        await execute({ path: '/bar/12', method: 'get' })
+        await request(execute).get('/bar/12')
         expect(spy).toHaveBeenCalled()
         expect(getBarHandler).toHaveBeenCalled()
       })
 
       it('does not apply middleware on other operations', async () => {
-        await execute({ path: '/foo/12', method: 'get' })
+        await request(execute).get('/foo/12')
         expect(spy).not.toHaveBeenCalled()
         expect(getFooHandler).toHaveBeenCalled()
       })
@@ -103,7 +104,7 @@ describe('executable-openapi-middleware', () => {
             '/bar/{barId}': {
               get: async (handler, ...rest) => {
                 spy()
-                return handler(...rest)
+                return await handler(...rest)
               }
             }
           }
@@ -113,13 +114,13 @@ describe('executable-openapi-middleware', () => {
       })
 
       it('applies middleware on the path', async () => {
-        await execute({ path: '/bar/12', method: 'get' })
+        await request(execute).get('/bar/12')
         expect(spy).toHaveBeenCalled()
         expect(getBarHandler).toHaveBeenCalled()
       })
 
       it('does not apply middleware on other paths', async () => {
-        await execute({ path: '/foo/12', method: 'get' })
+        await request(execute).get('/foo/12')
         expect(spy).not.toHaveBeenCalled()
         expect(getFooHandler).toHaveBeenCalled()
       })
@@ -146,7 +147,7 @@ describe('executable-openapi-middleware', () => {
       })
 
       it('applies middlewares in order', async () => {
-        await execute({ path: '/bar/12', method: 'get' })
+        await request(execute).get('/bar/12')
         expect(spy.mock.calls).toMatchObject([
           ['middleware-1-before'],
           ['middleware-2-before'],

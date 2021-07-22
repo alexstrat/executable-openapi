@@ -1,8 +1,9 @@
 import { createRouter } from 'executable-openapi-router'
 import { OpenAPIV3 } from 'openapi-types'
 import { applyMiddleware } from 'executable-openapi-middleware'
-import { executableOpenAPIMiddlewareSecurity } from '..'
+import { request } from 'executable-openapi-test-utils'
 import { ExecuteOperation } from 'executable-openapi-types'
+import { executableOpenAPIMiddlewareSecurity } from '..'
 
 const document: OpenAPIV3.Document = {
   openapi: '3.1.0',
@@ -81,18 +82,8 @@ const createExecute = (
 describe('executableOpenAPIMiddlewareSecurity', () => {
   it('validates against single security requirement', async () => {
     const execute = createExecute([{ BasicAuth: [] }])
-    const pass = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: true }
-    }, undefined)
-    expect(pass?.status).toEqual(200)
-
-    const notPass = await execute({
-      method: 'get',
-      path: '/test'
-    }, undefined)
-    expect(notPass?.status).toEqual(403)
+    await request(execute).get('/test').auth('BasicAuth').expect(200)
+    await request(execute).get('/test').expect(403)
   })
 
   it('validates against 2 security requirements', async () => {
@@ -101,52 +92,9 @@ describe('executableOpenAPIMiddlewareSecurity', () => {
       { BearerAuth: [] }
     ])
 
-    const pass = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: true }
-    }, undefined)
-    expect(pass?.status).toEqual(200)
-
-    const pass2 = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BearerAuth: true }
-    }, undefined)
-    expect(pass2?.status).toEqual(200)
-
-    const notPass = await execute({
-      method: 'get',
-      path: '/test'
-    }, undefined)
-    expect(notPass?.status).toEqual(403)
-  })
-
-  it('validates against 2 security requirements', async () => {
-    const execute = createExecute([
-      { BasicAuth: [] },
-      { BearerAuth: [] }
-    ])
-
-    const pass = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: true }
-    }, undefined)
-    expect(pass?.status).toEqual(200)
-
-    const pass2 = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BearerAuth: true }
-    }, undefined)
-    expect(pass2?.status).toEqual(200)
-
-    const notPass = await execute({
-      method: 'get',
-      path: '/test'
-    }, undefined)
-    expect(notPass?.status).toEqual(403)
+    await request(execute).get('/test').auth('BasicAuth').expect(200)
+    await request(execute).get('/test').auth('BearerAuth').expect(200)
+    await request(execute).get('/test').expect(403)
   })
 
   it('validates against a document level requirement', async () => {
@@ -154,17 +102,8 @@ describe('executableOpenAPIMiddlewareSecurity', () => {
       { BasicAuth: [] }
     ])
 
-    const pass = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: true }
-    }, undefined)
-    expect(pass?.status).toEqual(200)
-    const notPass = await execute({
-      method: 'get',
-      path: '/test'
-    }, undefined)
-    expect(notPass?.status).toEqual(403)
+    await request(execute).get('/test').auth('BasicAuth').expect(200)
+    await request(execute).get('/test').expect(403)
   })
 
   it('validates against a operation level requirement overriding a document level requirement', async () => {
@@ -172,23 +111,9 @@ describe('executableOpenAPIMiddlewareSecurity', () => {
       { BasicAuth: [] }
     ])
 
-    const pass = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BearerAuth: true }
-    }, undefined)
-    expect(pass?.status).toEqual(200)
-    const notPass = await execute({
-      method: 'get',
-      path: '/test'
-    }, undefined)
-    expect(notPass?.status).toEqual(403)
-    const notPass2 = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: true }
-    }, undefined)
-    expect(notPass2?.status).toEqual(403)
+    await request(execute).get('/test').auth('BearerAuth').expect(200)
+    await request(execute).get('/test').expect(403)
+    await request(execute).get('/test').auth('BasicAuth').expect(403)
   })
 
   it('validates against a 2-schemes security requirement', async () => {
@@ -196,19 +121,9 @@ describe('executableOpenAPIMiddlewareSecurity', () => {
       BasicAuth: [],
       BearerAuth: []
     }])
-    const pass = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: true, BearerAuth: true }
-    }, undefined)
-    expect(pass?.status).toEqual(200)
 
-    const notPass = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: true }
-    }, undefined)
-    expect(notPass?.status).toEqual(403)
+    await request(execute).get('/test').auth('BasicAuth').auth('BearerAuth').expect(200)
+    await request(execute).get('/test').auth('BasicAuth').expect(403)
   })
 
   it('validates against a security requirement with scopes', async () => {
@@ -224,18 +139,8 @@ describe('executableOpenAPIMiddlewareSecurity', () => {
     }, undefined)
     expect(pass?.status).toEqual(200)
 
-    const notPass = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: [] }
-    }, undefined)
-    expect(notPass?.status).toEqual(403)
-
-    const notPass2 = await execute({
-      method: 'get',
-      path: '/test',
-      securities: { BasicAuth: ['admin'] }
-    }, undefined)
-    expect(notPass2?.status).toEqual(403)
+    await request(execute).get('/test').auth('BasicAuth', ['admin', 'write']).expect(200)
+    await request(execute).get('/test').auth('BasicAuth', []).expect(403)
+    await request(execute).get('/test').auth('BasicAuth', ['admin']).expect(403)
   })
 })

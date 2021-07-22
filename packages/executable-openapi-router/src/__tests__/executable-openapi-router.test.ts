@@ -1,4 +1,5 @@
 import { OperationExecutionResponse, Parameters } from 'executable-openapi-types'
+import { request } from 'executable-openapi-test-utils'
 import { OpenAPIV3 } from 'openapi-types'
 import { createRouter } from '..'
 
@@ -39,14 +40,10 @@ describe('executable-openapi-router', () => {
         }
       })
 
-    const res = await execute({
-      method: 'get',
-      path: '/foo/1'
-    })
+    await request(execute).get('/foo/1').expect(200)
 
     expect(handler).toHaveBeenCalled()
     expect(handler.mock.calls[0][0]).toMatchObject({ path: { id: '1' } })
-    expect(res).toMatchObject({ status: 200 })
   })
 
   test('resolves ref', async () => {
@@ -62,14 +59,10 @@ describe('executable-openapi-router', () => {
         }
       })
 
-    const res = await execute({
-      method: 'get',
-      path: '/foos/1'
-    })
+    await request(execute).get('/foos/1').expect(200)
 
     expect(handler).toHaveBeenCalled()
     expect(handler.mock.calls[0][0]).toMatchObject({ path: { id: '1' } })
-    expect(res).toMatchObject({ status: 200 })
   })
 
   test('call handler given by operationId', async () => {
@@ -83,14 +76,10 @@ describe('executable-openapi-router', () => {
         }
       })
 
-    const res = await execute({
-      method: 'post',
-      path: '/bar/1/foo'
-    })
+    await request(execute).post('/bar/1/foo').expect(200)
 
     expect(handler).toHaveBeenCalled()
     expect(handler.mock.calls[0][0]).toMatchObject({ path: { barId: '1' } })
-    expect(res).toMatchObject({ status: 200 })
   })
 
   test('return null when path is not in document', async () => {
@@ -104,10 +93,7 @@ describe('executable-openapi-router', () => {
         }
       })
 
-    const res = await execute({
-      method: 'post',
-      path: '/not-our-api'
-    })
+    const res = await request(execute).post('/not-our-api')
 
     expect(handler).not.toHaveBeenCalled()
     expect(res).toEqual(null)
@@ -116,10 +102,7 @@ describe('executable-openapi-router', () => {
   test('throw when no handler found', async () => {
     const execute = createRouter(document, {})
 
-    await expect(execute({
-      method: 'get',
-      path: '/foo/1'
-    })).rejects.toThrow('No handler found for /foo/{id}')
+    await expect(request(execute).get('/foo/1')).rejects.toThrow('No handler found for /foo/{id}')
   })
 
   test('call default handler when provided and no handler found', async () => {
@@ -128,10 +111,7 @@ describe('executable-openapi-router', () => {
     }))
     const execute = createRouter(document, { default: handler })
 
-    await execute({
-      method: 'get',
-      path: '/foo/1'
-    })
+    await request(execute).get('/foo/1')
 
     expect(handler).toHaveBeenCalled()
   })
@@ -150,10 +130,7 @@ describe('executable-openapi-router', () => {
       }
     })
 
-    await execute({
-      method: 'get',
-      path: '/user/none'
-    })
+    await request(execute).get('/user/none')
 
     expect(handlerConcrete).toHaveBeenCalled()
     expect(handler).not.toHaveBeenCalled()

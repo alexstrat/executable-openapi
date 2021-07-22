@@ -38,7 +38,8 @@
     "ts-jest": "^27.0.2",
     "typescript": "^4.3.2",
     "executable-openapi-router": "^0.0.0",
-    "executable-openapi-types": "^0.0.0"
+    "executable-openapi-types": "^0.0.0",
+    "executable-openapi-test-utils": "^0.0.0"
   },
   "dependencies": {}
 }
