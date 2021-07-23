@@ -1,10 +1,10 @@
 import { createRouter, HandlersMap } from 'executable-openapi-router'
 import { ExecuteOperation, OperationHandler } from 'executable-openapi-types'
-import { OpenAPIV3 } from 'openapi-types'
+import { OpenAPIObject } from 'openapi3-ts'
 import { request } from 'executable-openapi-test-utils'
 import { applyMiddleware } from '..'
 
-const document: OpenAPIV3.Document = {
+const document: OpenAPIObject = {
   openapi: '3.1.0',
   info: {
     title: 'Example API',

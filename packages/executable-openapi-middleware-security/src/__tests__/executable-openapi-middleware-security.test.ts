@@ -1,11 +1,11 @@
 import { createRouter } from 'executable-openapi-router'
-import { OpenAPIV3 } from 'openapi-types'
+import { OpenAPIObject, SecurityRequirementObject } from 'openapi3-ts'
 import { applyMiddleware } from 'executable-openapi-middleware'
 import { request } from 'executable-openapi-test-utils'
 import { ExecuteOperation } from 'executable-openapi-types'
 import { executableOpenAPIMiddlewareSecurity } from '..'
 
-const document: OpenAPIV3.Document = {
+const document: OpenAPIObject = {
   openapi: '3.1.0',
   info: {
     title: 'Example API',
@@ -50,8 +50,8 @@ const document: OpenAPIV3.Document = {
 }
 
 const createExecute = (
-  security: OpenAPIV3.SecurityRequirementObject[] | undefined,
-  documentSecurity?: OpenAPIV3.SecurityRequirementObject[]
+  security: SecurityRequirementObject[] | undefined,
+  documentSecurity?: SecurityRequirementObject[]
 ): ExecuteOperation<unknown> => {
   const handlers = applyMiddleware({
     operations: {

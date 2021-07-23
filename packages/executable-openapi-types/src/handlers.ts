@@ -1,5 +1,5 @@
 
-import { OpenAPIV3 } from 'openapi-types'
+import { OpenAPIObject, OperationObject, PathItemObject } from 'openapi3-ts'
 import {
   OperationExecutionRequest,
   OperationExecutionResponse
@@ -7,9 +7,9 @@ import {
 
 export interface OperationInfo {
   executionRequest: OperationExecutionRequest
-  document: OpenAPIV3.Document
-  operationObject: OpenAPIV3.OperationObject
-  pathItemObject: OpenAPIV3.PathItemObject
+  document: OpenAPIObject
+  operationObject: OperationObject
+  pathItemObject: PathItemObject
   path: string
 }
 

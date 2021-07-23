@@ -1,9 +1,9 @@
 import { OperationExecutionResponse, Parameters } from 'executable-openapi-types'
 import { request } from 'executable-openapi-test-utils'
-import { OpenAPIV3 } from 'openapi-types'
+import { OpenAPIObject } from 'openapi3-ts'
 import { createRouter } from '..'
 
-const document: OpenAPIV3.Document = {
+const document: OpenAPIObject = {
   openapi: '3.1.0',
   info: {
     title: 'Example API',

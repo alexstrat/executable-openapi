@@ -1,5 +1,5 @@
 import { ExecuteOperation, OperationExecutionRequest, OperationExecutionResponse, OperationHandler } from 'executable-openapi-types'
-import { OpenAPIV3 } from 'openapi-types'
+import { OpenAPIObject, PathItemObject } from 'openapi3-ts'
 import { params } from 'bath'
 import * as pointer from 'jsonpointer'
 import { HandlersMap } from './types'
@@ -26,7 +26,7 @@ type RefResolver = ($ref: string) => Promise<unknown>
  * @param options -  `CreateRouterOptions`
  */
 export function createRouter<TContext = undefined> (
-  document: OpenAPIV3.Document,
+  document: OpenAPIObject,
   handlers: HandlersMap<TContext>,
   options: CreateRouterOptions = {}
 ): ExecuteOperation<TContext> {
@@ -55,9 +55,9 @@ export function createRouter<TContext = undefined> (
     if (pathParameters === null) return null
     if (pathItemObject === undefined) return null
 
-    let resolvedPathItemObject: OpenAPIV3.PathItemObject | undefined
+    let resolvedPathItemObject: PathItemObject
     if (pathItemObject.$ref !== undefined) {
-      resolvedPathItemObject = await resolveRef(pathItemObject.$ref) as OpenAPIV3.PathItemObject
+      resolvedPathItemObject = await resolveRef(pathItemObject.$ref) as PathItemObject
     } else {
       resolvedPathItemObject = pathItemObject
     }
@@ -95,7 +95,7 @@ const notImplementedHandler: OperationHandler<unknown> = (_p, _b, _c, { path }) 
   throw new Error(`No handler found for ${path}`)
 }
 
-const createDefaultRefResolver = (document: OpenAPIV3.Document): RefResolver => {
+const createDefaultRefResolver = (document: OpenAPIObject): RefResolver => {
   const resolver = async ($ref: string): Promise<unknown> => {
     if (!$ref.startsWith('#')) {
       throw new Error(`${$ref} is a remote ref and can not be resolved`)

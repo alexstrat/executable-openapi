@@ -40,9 +40,9 @@
   },
   "dependencies": {
     "bath": "^3.0.1",
-    "executable-openapi-types": "^0.0.0",
     "executable-openapi-test-utils": "^0.0.0",
+    "executable-openapi-types": "^0.0.0",
     "jsonpointer": "^4.1.0",
-    "openapi-types": "^9.0.3"
+    "openapi3-ts": "^2.0.1"
   }
 }

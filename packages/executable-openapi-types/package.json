@@ -39,6 +39,6 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
-    "openapi-types": "^9.0.3"
+    "openapi3-ts": "^2.0.1"
   }
 }

@@ -1,11 +1,11 @@
 import type { OperationExecutionRequest } from 'executable-openapi-types'
-import type { OpenAPIV3 } from 'openapi-types'
+import { SecurityRequirementObject } from 'openapi3-ts'
 
 /**
  * Implements security requirements validation logic.
  */
 export const validateSecurity = (
-  security: OpenAPIV3.SecurityRequirementObject[],
+  security: SecurityRequirementObject[],
   request: OperationExecutionRequest
 ): [boolean, { [schemeName: string]: string }] => {
   const schemeResults: { [schemeName: string]: string } = {}

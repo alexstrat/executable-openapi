@@ -1,12 +1,12 @@
 import express = require('express')
-import { OpenAPIV3 } from 'openapi-types'
+import { OpenAPIObject } from 'openapi3-ts'
 import { createRouter } from 'executable-openapi-router'
 import { ExecuteOperation } from 'executable-openapi-types'
 
 import { executableOpenAPIExpressHandler } from '..'
 import supertest = require('supertest')
 
-const document: OpenAPIV3.Document = {
+const document: OpenAPIObject = {
   openapi: '3.1.0',
   info: {
     title: 'Example API',

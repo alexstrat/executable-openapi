@@ -20,6 +20,6 @@
   "devDependencies": {
     "@types/express": "^4.17.12",
     "@types/js-yaml": "^4.0.1",
-    "openapi-types": "^9.0.3"
+    "openapi3-ts": "^2.0.1"
   }
 }
