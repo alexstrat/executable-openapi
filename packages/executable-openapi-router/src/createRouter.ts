@@ -1,7 +1,7 @@
 import { ExecuteOperation, OperationExecutionRequest, OperationExecutionResponse, OperationHandler } from 'executable-openapi-types'
 import { OpenAPIObject, PathItemObject } from 'openapi3-ts'
 import { params } from 'bath'
-import * as pointer from 'jsonpointer'
+import { localRefResolver } from 'openapi-document-local-ref-resolver'
 import { HandlersMap } from './types'
 import { pathConcretenessCompareFunction } from './utils'
 
@@ -35,7 +35,7 @@ export function createRouter<TContext = undefined> (
 
   const defaultHandler = handlers.default !== undefined ? handlers.default : notImplementedHandler
 
-  const resolveRef = options.documentRefResolver !== undefined ? options.documentRefResolver : createDefaultRefResolver(document)
+  const resolveRef = options.documentRefResolver !== undefined ? options.documentRefResolver : localRefResolver(document)
 
   const execute = async (executionRequest: OperationExecutionRequest, context: TContext): Promise<OperationExecutionResponse | null> => {
     const matchedPaths = paths
@@ -93,18 +93,4 @@ export function createRouter<TContext = undefined> (
 
 const notImplementedHandler: OperationHandler<unknown> = (_p, _b, _c, { path }) => {
   throw new Error(`No handler found for ${path}`)
-}
-
-const createDefaultRefResolver = (document: OpenAPIObject): RefResolver => {
-  const resolver = async ($ref: string): Promise<unknown> => {
-    if (!$ref.startsWith('#')) {
-      throw new Error(`${$ref} is a remote ref and can not be resolved`)
-    }
-    const res = pointer.get(document, $ref.substring(1))
-    if (typeof res.$ref === 'string') {
-      return await resolver(res.$ref)
-    }
-    return res
-  }
-  return resolver
 }
