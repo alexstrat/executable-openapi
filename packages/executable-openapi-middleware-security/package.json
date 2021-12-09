@@ -1,7 +1,7 @@
 {
   "name": "executable-openapi-middleware-security",
   "version": "0.0.0",
-  "description": "Middleware for executable-openapi that validates request against specification's security requirements.",
+  "description": "Middleware for executable-openapi that validates request against specification's security requirements",
   "keywords": [
     "openapi",
     "executable-openapi"
