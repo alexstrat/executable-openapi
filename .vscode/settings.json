@@ -3,5 +3,6 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "javascript.preferences.quoteStyle": "single"
 }
