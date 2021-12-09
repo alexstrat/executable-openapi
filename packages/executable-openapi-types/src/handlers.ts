@@ -14,9 +14,7 @@ export interface OperationInfo {
 }
 
 export interface Parameters {
-  path?: {
-    [paramName: string]: string
-  }
+  path?: Record<string, unknown>
   // todo:
   // query
   // cookies
@@ -27,7 +25,7 @@ export interface Parameters {
 export type Body = unknown
 
 export type OperationHandler<TContext> = (
-  paramters: Parameters,
+  parameters: Parameters,
   body: Body,
   context: TContext,
   info: OperationInfo
