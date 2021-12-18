@@ -78,7 +78,11 @@ export const executableOpenAPIMiddlewarePathParameters = <TExecutionContext>(
       // if value was already not string we can assume it was already
       // processed => we just continue to coerce and validate
       if (typeof value === 'string') {
+        const { style = 'simple' } = pathParametersSpec
         // todo: handle other parameters styles
+        if (style !== 'simple') {
+          throw new Error('NotImplemented: missing support for style other than simple (see https://git.io/JD1vU)')
+        }
         const tpl = uriTemplates(`{${name}}`)
         value = tpl.fromUri(value)?.[name]
       }
