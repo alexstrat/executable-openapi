@@ -15,8 +15,8 @@ export interface OperationInfo {
 
 export interface Parameters {
   path?: Record<string, unknown>
-  // todo:
-  // query
+  query?: Record<string, unknown>
+
   // cookies
   // header
 }

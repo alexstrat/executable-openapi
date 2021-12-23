@@ -34,9 +34,14 @@ export interface OperationExecutionRequest {
 
   /**
    * The query part of the request.
+   *
+   * This typing corresponds to what `qs` (used by default `express`)
+   * would give us in the most generic case.
+   * in future: for support of less usual query paramters formatting, we may need to
+   * pass directly string here and do the parsing inside the middleware
    */
-  query?: string | {
-    [queryName: string]: string
+  query?: {
+    [queryName: string]: unknown
   }
 
   /**

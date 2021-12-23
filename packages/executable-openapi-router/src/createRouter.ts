@@ -73,7 +73,8 @@ export function createRouter<TContext = undefined> (
     }
 
     const parameters = {
-      path: pathParameters
+      path: pathParameters,
+      query: executionRequest.query
     }
 
     // find a handler

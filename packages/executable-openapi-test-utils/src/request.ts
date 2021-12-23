@@ -75,7 +75,7 @@ export class OperationExecutionRequestBuilder {
     return this
   }
 
-  query (query: string | {
+  query (query: {
     [queryName: string]: string
   }): this {
     this.request = {

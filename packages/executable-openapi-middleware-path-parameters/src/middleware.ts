@@ -7,15 +7,13 @@ import Ajv, { Format } from 'ajv/dist/2020'
 import { ResponsesObject } from 'openapi3-ts'
 
 import { OperationExecutionResponse } from 'executable-openapi-types'
-
-import { compileAjvBasedValidate, resolveOperationParametersSpecs } from './utils'
-import { formatInvalidPathParameterResponse, InvalidPathParameterError } from './errors'
+import { compileAjvBasedValidate, formatInvalidParameterResponse, InvalidParameterError, resolveOperationParametersSpecs } from 'executable-openapi-parameters'
 
 type RefResolver = ($ref: string) => Promise<unknown>
 
 export type ExecutableOpenAPIMiddlewarePathParametersFormat = Format
 
-interface ExecutableOpenAPIMiddlewarePathParametersOption {
+export interface ExecutableOpenAPIMiddlewarePathParametersOption {
   /**
    * A JSON reference resolver that'll be used to resolve
    * JSON references found in `document`.
@@ -26,7 +24,7 @@ interface ExecutableOpenAPIMiddlewarePathParametersOption {
   documentRefResolver?: RefResolver
 
   formatErrorResponse?: (
-    error: InvalidPathParameterError,
+    error: InvalidParameterError,
     responseObject: ResponsesObject
   ) => OperationExecutionResponse | Promise<OperationExecutionResponse>
 
@@ -41,7 +39,7 @@ interface ExecutableOpenAPIMiddlewarePathParametersOption {
 export const executableOpenAPIMiddlewarePathParameters = <TExecutionContext>(
   {
     documentRefResolver,
-    formatErrorResponse = formatInvalidPathParameterResponse,
+    formatErrorResponse = formatInvalidParameterResponse,
     formats
   }: ExecutableOpenAPIMiddlewarePathParametersOption = {}
 ): OperationMiddlewareHandler<TExecutionContext> => {
@@ -89,19 +87,20 @@ export const executableOpenAPIMiddlewarePathParameters = <TExecutionContext>(
 
       // per spec, path parameters are always required
       if (value === undefined) {
-        const error = new InvalidPathParameterError(name, 'is required')
+        const error = new InvalidParameterError(name, 'path', 'is required')
         return formatErrorResponse(error, info.operationObject.responses)
       }
 
       // validates and coerce
       if (schema !== undefined) {
+        // @ts-expect-error imcompatible options ?
         const validate = compileAjvBasedValidateCached(ajv, schema)
 
         const { pass, errors, data: newValue } = validate(value)
         if (!pass) {
           invariant(errors, '`validate` should return defined `errors` when `pass` is true')
 
-          const error = new InvalidPathParameterError(name, errors)
+          const error = new InvalidParameterError(name, 'path', errors)
           return formatErrorResponse(error, info.operationObject.responses)
         }
         newPathParameters[name] = newValue

@@ -3,6 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "executable-openapi-parameters": [
+        "executable-openapi-parameters/src"
+      ],
+      "executable-openapi-middleware-query-parameters": [
+        "executable-openapi-middleware-query-parameters/src"
+      ],
       "openapi-document-local-ref-resolver": [
         "openapi-document-local-ref-resolver/src"
       ],
