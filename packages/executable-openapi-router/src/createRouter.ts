@@ -83,10 +83,10 @@ export function createRouter<TContext = undefined> (
     const handler = (pathHandler !== undefined) ? pathHandler : operationHandler
 
     if (handler === undefined) {
-      return await defaultHandler(parameters, executionRequest.body, context, info)
+      return await defaultHandler(parameters, executionRequest.body?.content, context, info)
     }
 
-    return await handler(parameters, executionRequest.body, context, info)
+    return await handler(parameters, executionRequest.body?.content, context, info)
   }
 
   return execute as ExecuteOperation<TContext>

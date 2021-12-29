@@ -14,6 +14,17 @@ export type ExecuteOperation<TExecutionContext> =
       (req: OperationExecutionRequest) => Promise<ExcecuteOperationResult> :
       (req: OperationExecutionRequest, context: TExecutionContext) => Promise<ExcecuteOperationResult>
 
+export interface OperationExecutionRequestBody {
+  /**
+   * The media-type of the request body.
+   */
+  mediaType: string
+  /**
+   * The content of the request body.
+   */
+  content: unknown
+}
+
 /**
  * A request for executing an operation that can be
  * consumed by [[ExecuteOperation]].
@@ -59,11 +70,9 @@ export interface OperationExecutionRequest {
   }
 
   /**
-   * The body of the request with its media type as key.
+   * The body of the request if any.
    */
-  body?: {
-    [mediaType: string]: unknown
-  }
+  body?: OperationExecutionRequestBody
 
   /**
    * The security schemes this request has been authenticated against.

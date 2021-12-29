@@ -4,37 +4,37 @@ import { request } from '..'
 describe('executable-openapi-test-utils', () => {
   test('builds a request', () => {
     expect(request()
-      .post('/foo')
-      .query({ name: 'bar' })
-      .send({ any: 'data' })
-      .auth('basicAuth', ['admin'])
-      .build())
-      .toMatchInlineSnapshot(`
-  Object {
-    "body": Object {
-      "application/json": Object {
-        "any": "data",
-      },
+      . post('/foo')
+      . query({ name: 'bar' })
+      . send({ any: 'data' })
+      . auth('basicAuth', ['admin'])
+      . build())
+      . toMatchInlineSnapshot(`
+Object {
+  "body": Object {
+    "content": Object {
+      "any": "data",
     },
-    "method": "post",
-    "path": "/foo",
-    "query": Object {
-      "name": "bar",
-    },
-    "securities": Object {
-      "basicAuth": Array [
-        "admin",
-      ],
-    },
-  }
-  `)
+    "mediaType": "application/json",
+  },
+  "method": "post",
+  "path": "/foo",
+  "query": Object {
+    "name": "bar",
+  },
+  "securities": Object {
+    "basicAuth": Array [
+      "admin",
+    ],
+  },
+}
+`)
   })
 
   test('not thhrow when expect a correct status', async () => {
     const execute: ExecuteOperation<unknown> = async ({ query }) => ({
       status: 200,
       content: {
-        // @ts-expect-error
         'application/json': query?.name
       }
     })

@@ -42,7 +42,7 @@ export const compileAjvBasedValidate = (ajv: Ajv, schema: Schema): Validate => {
         ...e,
         // we need to remove the referene to `ROOT` so that
         // it looks like we ran the validation directly on the data
-        instancePath: e.instancePath.replace(`/${ROOT}`, '/'),
+        instancePath: e.instancePath.replace(`/${ROOT}/`, '/'),
         schemaPath: e.schemaPath.replace(`#/properties/${ROOT}/`, '#/')
       })),
       data: newData
@@ -86,7 +86,7 @@ export const resolveOperationParametersSpecs = async (
   return parametersSpecs
 }
 
-// WIP
+// WIP https://git.io/Jymr8
 export class InvalidParameterError extends Error /* HTTError */ {
   constructor (
     public name: string,

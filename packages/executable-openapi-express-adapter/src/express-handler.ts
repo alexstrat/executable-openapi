@@ -50,8 +50,8 @@ export function executableOpenAPIExpressHandler<TExecutionContext> ({
     let body
     if (req.headers['content-type'] !== undefined && req.body !== undefined) {
       body = {
-        // todo: figure what type `body` should be
-        [req.headers['content-type']]: req.body
+        mediaType: req.headers['content-type'],
+        content: req.body
       }
     }
 

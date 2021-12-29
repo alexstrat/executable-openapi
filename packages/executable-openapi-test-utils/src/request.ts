@@ -90,7 +90,8 @@ export class OperationExecutionRequestBuilder {
   send (mediaType: string | unknown, content?: unknown): this {
     if (typeof mediaType === 'object') {
       this.request.body = {
-        'application/json': mediaType
+        mediaType: 'application/json',
+        content: mediaType
       }
       return this
     }
@@ -102,7 +103,8 @@ export class OperationExecutionRequestBuilder {
     }
 
     this.request.body = {
-      [mediaType]: content
+      mediaType,
+      content
     }
 
     return this

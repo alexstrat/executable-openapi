@@ -6,6 +6,9 @@
       "executable-openapi-parameters": [
         "executable-openapi-parameters/src"
       ],
+      "executable-openapi-middleware-request-body": [
+        "executable-openapi-middleware-request-body/src"
+      ],
       "executable-openapi-middleware-query-parameters": [
         "executable-openapi-middleware-query-parameters/src"
       ],
