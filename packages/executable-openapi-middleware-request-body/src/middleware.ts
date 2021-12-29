@@ -78,7 +78,7 @@ export const executableOpenAPIMiddlewareRequestBody = <TExecutionContext>({
       return await formatErrorResponse(error, info.operationObject.responses)
     }
 
-    // todo: for requests that match multiple keys, only the most specific key is applicable. e.g. text/plain overrides text/*
+    // todo: https://git.io/JyDl0 for requests that match multiple keys, only the most specific key is applicable. e.g. text/plain overrides text/*
     const contentSpec = requestBody.content[matchedMediaTypes[0]]
 
     if (contentSpec.schema !== undefined) {
