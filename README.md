@@ -1,6 +1,6 @@
 # Executable OpenAPI
 
-Executable OpenAPI is a set of tools to implement a design-first API from OpenAPI specification.
+> Set of tools to implement a design-first API from OpenAPI specification.
 
 ![logo](https://github.com/alexstrat/executable-openapi/blob/main/website/static/img/logo.svg)
 
