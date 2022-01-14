@@ -5,7 +5,7 @@ import { localRefResolver } from 'openapi-document-local-ref-resolver'
 import { HandlersMap } from './types'
 import { pathConcretenessCompareFunction } from './utils'
 
-interface CreateRouterOptions {
+export interface CreateRouterOptions {
   /**
    * A JSON reference resolver that'll be used to resolve
    * JSON references found in `document`.

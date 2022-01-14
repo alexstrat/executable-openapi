@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "executable-openapi": [
+        "executable-openapi/src"
+      ],
       "executable-openapi-parameters": [
         "executable-openapi-parameters/src"
       ],
