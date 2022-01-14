@@ -4,7 +4,8 @@
   "scripts": {
     "test": "lerna exec -- npm run test",
     "lint": "lerna exec -- npm run lint",
-    "new:package": "hygen package new"
+    "new:package": "hygen package new",
+    "examples:link-deps": "ts-node scripts/link-examples.ts"
   },
   "devDependencies": {
     "hygen": "^6.1.0",

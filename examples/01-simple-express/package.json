@@ -14,7 +14,7 @@
     "js-yaml": "^4.1.0",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4",
-    "executable-openapi-router": "^0.0.0",
+    "executable-openapi": "^0.0.0",
     "executable-openapi-express-adapter": "^0.0.0"
   },
   "devDependencies": {

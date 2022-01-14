@@ -5,14 +5,18 @@ info:
 paths:
   /hello/{name}:
     get:
+      operationId: getHello
       parameters:
         - name: name
           in: path
           required: true
           schema:
             type : string
+            minLength: 1
+            maxLength: 5
       responses:
         '200':
+          description: A successfull response
           content:
             application/json:
               schema:
