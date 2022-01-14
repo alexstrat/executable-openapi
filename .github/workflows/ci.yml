@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
-      - run: lerna bootstrap --no-ci
+      - run: lerna bootstrap
       - run: lerna link && lerna run build
       - run: npm run lint
   test:
@@ -26,6 +26,6 @@ jobs:
         with:
           node-version: 14.x
           cache: npm
-      - run: lerna bootstrap --no-ci
+      - run: lerna bootstrap
       - run: lerna link && lerna run build
       - run: npm run test
