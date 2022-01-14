@@ -2,8 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "test": "lerna exec -- npm run test",
-    "lint": "lerna exec -- npm run lint",
+    "test": "lerna run test --parallel",
+    "lint": "lerna run lint --parallel",
     "new:package": "hygen package new",
     "examples:link-deps": "ts-node scripts/link-examples.ts"
   },

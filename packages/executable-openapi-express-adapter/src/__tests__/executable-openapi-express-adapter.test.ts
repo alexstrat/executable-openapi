@@ -55,7 +55,7 @@ describe('executable-openapi-express-adapter', () => {
           status: 200,
           content: {
             'application/json': {
-              message: `Hello ${parameters?.path?.name ?? ''}`
+              message: `Hello ${parameters.path?.name ?? ''}`
             }
           }
         })

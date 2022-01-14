@@ -40,9 +40,9 @@
   },
   "dependencies": {
     "bath": "^3.0.1",
-    "executable-openapi-test-utils": "^0.0.0",
-    "executable-openapi-types": "^0.0.0",
-    "openapi-document-local-ref-resolver": "^0.0.0",
+    "executable-openapi-test-utils": "*",
+    "executable-openapi-types": "*",
+    "openapi-document-local-ref-resolver": "*",
     "openapi3-ts": "^2.0.1"
   }
 }

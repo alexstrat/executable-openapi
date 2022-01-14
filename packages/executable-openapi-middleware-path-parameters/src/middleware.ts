@@ -88,7 +88,7 @@ export const executableOpenAPIMiddlewarePathParameters = <TExecutionContext>(
       // per spec, path parameters are always required
       if (value === undefined) {
         const error = new InvalidParameterError(name, 'path', 'is required')
-        return formatErrorResponse(error, info.operationObject.responses)
+        return await formatErrorResponse(error, info.operationObject.responses)
       }
 
       // validates and coerce
@@ -101,7 +101,7 @@ export const executableOpenAPIMiddlewarePathParameters = <TExecutionContext>(
           invariant(errors, '`validate` should return defined `errors` when `pass` is true')
 
           const error = new InvalidParameterError(name, 'path', errors)
-          return formatErrorResponse(error, info.operationObject.responses)
+          return await formatErrorResponse(error, info.operationObject.responses)
         }
         newPathParameters[name] = newValue
       } else {

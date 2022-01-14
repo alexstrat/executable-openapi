@@ -30,7 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "eslint": "^7.27.0",
     "eslint-config-standard-with-typescript": "^20.0.0",
-    "executable-openapi-test-utils": "^0.0.0",
+    "executable-openapi-test-utils": "*",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
@@ -40,13 +40,12 @@
   },
   "dependencies": {
     "openapi3-ts": "^2.0.1",
-    "executable-openapi-types": "^0.0.0",
-    "executable-openapi-router": "^0.0.0",
-    "executable-openapi-middleware": "^0.0.0",
-    "executable-openapi-middleware-path-parameters": "^0.0.0",
-    "executable-openapi-middleware-request-security": "^0.0.0",
-    "executable-openapi-middleware-request-body": "^0.0.0",
-    "executable-openapi-middleware-query-parameters": "^0.0.0",
-    "executable-openapi-middleware-security": "^0.0.0"
+    "executable-openapi-types": "*",
+    "executable-openapi-router": "*",
+    "executable-openapi-middleware": "*",
+    "executable-openapi-middleware-path-parameters": "*",
+    "executable-openapi-middleware-request-body": "*",
+    "executable-openapi-middleware-query-parameters": "*",
+    "executable-openapi-middleware-security": "*"
   }
 }
