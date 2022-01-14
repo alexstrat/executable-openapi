@@ -6,13 +6,9 @@ An executable OpenAPI adapter for ExpressJS
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-express-adapter
+$ npm install executable-openapi-express-adapter
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi-express-adapter'
-
-TODO: example
-```
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).

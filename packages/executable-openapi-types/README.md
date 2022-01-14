@@ -2,10 +2,6 @@
 
 > TODO: description
 
-## Usage
+## More
 
-```
-const executableOpenapiTypes = require('executable-openapi-types');
-
-// TODO: DEMONSTRATE API
-```
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).

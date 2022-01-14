@@ -6,13 +6,10 @@ Utilities for executable-openapi  middlewares related to parameters
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-parameters
+$ npm install executable-openapi-parameters
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi-parameters'
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).
 
-TODO: example
-```

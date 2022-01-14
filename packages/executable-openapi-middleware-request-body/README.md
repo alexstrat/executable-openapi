@@ -6,13 +6,9 @@ Middleware for executable-openapi that coerces and validates request body agains
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-middleware-request-body
+$ npm install executable-openapi-middleware-request-body
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi-middleware-request-body'
-
-TODO: example
-```
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).

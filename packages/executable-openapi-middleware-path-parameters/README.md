@@ -6,13 +6,10 @@ Middleware for executable-openapi that deserializes, coerces and validates reque
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-middleware-path-parameters
+$ npm install executable-openapi-middleware-path-parameters
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi-middleware-path-parameters'
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).
 
-TODO: example
-```

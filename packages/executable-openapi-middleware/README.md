@@ -6,13 +6,9 @@ Wrap up executable-openapi handlers with middleware functions
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-middleware
+$ npm install executable-openapi-middleware
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi-middleware'
-
-TODO: example
-```
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).

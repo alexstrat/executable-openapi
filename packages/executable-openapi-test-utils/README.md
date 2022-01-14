@@ -6,13 +6,10 @@ Utilities to test executable openapi
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-test-utils
+$ npm install executable-openapi-test-utils
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi-test-utils'
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).
 
-TODO: example
-```

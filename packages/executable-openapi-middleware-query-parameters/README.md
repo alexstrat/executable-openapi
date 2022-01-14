@@ -6,13 +6,9 @@ Middleware for executable-openapi that deserializes, coerces and validates query
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-middleware-query-parameters
+$ npm install executable-openapi-middleware-query-parameters
 ```
     
-## Usage
+### More
 
-```ts
-import { foo } from 'executable-openapi-middleware-query-parameters'
-
-TODO: example
-```
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).

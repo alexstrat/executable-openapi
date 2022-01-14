@@ -6,13 +6,9 @@ An Executable OpenAPI configuration to implement an API that conforms to its Ope
 ## Installation 
 
 ```bash 
-  npm install executable-openapi
+$ npm install executable-openapi
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi'
-
-TODO: example
-```
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).

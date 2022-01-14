@@ -6,13 +6,10 @@ A router for executable-openapi
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-router
+$ npm install executable-openapi-router
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi-router'
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).
 
-TODO: example
-```

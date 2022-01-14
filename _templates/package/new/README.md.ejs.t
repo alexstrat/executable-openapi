@@ -9,13 +9,9 @@ to: packages/<%=name%>/README.md
 ## Installation 
 
 ```bash 
-  npm install <%=name%>
+$ npm install <%=name%>
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from '<%=name%>'
-
-TODO: example
-```
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).

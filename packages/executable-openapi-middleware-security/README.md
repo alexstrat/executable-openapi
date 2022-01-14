@@ -6,13 +6,9 @@ Middleware for executable-openapi that validates request against specification's
 ## Installation 
 
 ```bash 
-  npm install executable-openapi-middleware-security
+$ npm install executable-openapi-middleware-security
 ```
     
-## Usage
+## More
 
-```ts
-import { foo } from 'executable-openapi-middleware-security'
-
-TODO: example
-```
+See [Executable OpenAPI project home page](https://github.com/alexstrat/executable-openapi).

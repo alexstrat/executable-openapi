@@ -9,8 +9,8 @@ to: packages/<%=name%>/package.json
     "openapi",
     "executable-openapi"
   ],
+  "homepage": "https://github.com/alexstrat/executable-openapi",
   "author": "Alexandre Lachèze <alexandre.lacheze@gmail.com>",
-  "homepage": "",
   "license": "ISC",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
